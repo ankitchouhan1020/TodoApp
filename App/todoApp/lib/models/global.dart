@@ -9,3 +9,10 @@ TextStyle intryTitleStyle = new TextStyle(
   fontSize: 40,
   color: darkGreyColor,
 );
+
+TextStyle todoTitleStyle = TextStyle(
+  color: darkGreyColor,
+  fontFamily: 'Avenir',
+  fontWeight: FontWeight.bold,
+  fontSize: 30,
+);
