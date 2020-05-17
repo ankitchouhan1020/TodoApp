@@ -1,4 +1,6 @@
 const express = require('express')
+
+const error = require('../middleware/error');
 const user = require('../router/user')
 const task = require('../router/task')
 const home = require('../router/home')
@@ -12,4 +14,5 @@ module.exports = function(app){
     app.use('/api/signin', signin )
     app.use('/api/user', user);
     app.use('/api/task', task);
+    app.use(error);
 }

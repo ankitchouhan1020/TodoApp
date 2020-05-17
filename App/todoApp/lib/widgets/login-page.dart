@@ -7,7 +7,6 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../widgets/my-home-page.dart';
 import '../widgets/register-page.dart';
 
-
 const SERVER_IP = 'http://192.168.43.55:3000';
 const SIGNIN_URL = '$SERVER_IP/api/signin';
 
@@ -72,7 +71,7 @@ class LoginPage extends StatelessWidget {
                     var jwt = res['msg'];
                     if (jwt != null) {
                       storage.write(key: "jwt", value: jwt);
-                      Navigator.push(
+                      Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
                               builder: (context) => MyHomePage(jwt)));

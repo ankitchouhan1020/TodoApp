@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:todoApp/main.dart';
+import 'package:todoApp/widgets/login-page.dart';
 
 import '../models/global.dart';
-import '../widgets/intrayPage.dart';
+import '../widgets/intray-page.dart';
 
 class MyHomePage extends StatefulWidget {
   final String jwt;
@@ -83,11 +85,21 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   child: FloatingActionButton(
                     child: Icon(
-                      Icons.add,
-                      size: 40,
+                      Icons.exit_to_app,
+                      size: 20, // 40, add
                     ),
                     backgroundColor: redColor,
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(()  {
+                        storage.delete(key: 'jwt');
+                      });
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => LoginPage(storage),
+                          ),
+                        );
+                    },
                   ),
                 )
               ],
