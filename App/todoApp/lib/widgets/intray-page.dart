@@ -3,7 +3,7 @@ import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
 import 'package:jaguar_jwt/jaguar_jwt.dart';
 
-import '../widgets/intray_page_todo.dart';
+import '../widgets/intray-page-todo.dart';
 import '../models/global.dart';
 import '../models/task.dart';
 
@@ -26,11 +26,13 @@ class IntrayPage extends StatefulWidget {
 }
 
 class _IntrayPageState extends State<IntrayPage> {
-  fetchTask(final String userId) async {
+  void fetchTask(final String userId) async {
+    if(widget._taskList.length > 0) return;
+    
     final _url = '$SERVER_IP/task/$userId';
     final response = await http.get(
       _url,
-      headers: {"Authorization": widget.jwt},
+      headers: {"x-auth-token": widget.jwt},
     );
     if (response.statusCode == 200) {
       var jsonResponse = convert.jsonDecode(response.body);
@@ -39,10 +41,10 @@ class _IntrayPageState extends State<IntrayPage> {
         jsonResponse = jsonResponse['tasks'];
         for (int i = 0; i < len; i++) {
           widget._taskList.add(Task(
-            taskId: jsonResponse[i]['_id'].toString(),
-            title: jsonResponse[i]['title'].toString(),
+            taskId: jsonResponse[i]['_id'],
+            title: jsonResponse[i]['title'],
             completed:
-                ((jsonResponse[i]['completed']) == 'false' ? false : true),
+                ((jsonResponse[i]['completed']) == false ? false : true),
             deadline: DateTime.parse(jsonResponse[i]['deadline']),
           ));
         }
