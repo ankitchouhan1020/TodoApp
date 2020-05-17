@@ -1,5 +1,3 @@
-import 'package:flutter/foundation.dart';
-
 class Task{
   List<Task> tasks;
   String note;
@@ -11,5 +9,5 @@ class Task{
   String taskId;
   String title;
 
-  Task({this.title, this.completed,this.taskId});
+  Task({this.taskId, this.title, this.completed, this.deadline});
 }
